@@ -1,0 +1,26 @@
+{
+  "name": "cd-nightwatchjs",
+  "version": "1.0.0",
+  "readme": "Basic package",
+  "description": "Selenium tests for Nightwatch and BrowserStack Automate",
+  "scripts": {
+    "proxy": "location=remote ./node_modules/.bin/nightwatch -r reporter/junit.js -c conf/proxy.conf.js -e chrome,firefox,ie",
+    "remote": "location=remote ./node_modules/.bin/nightwatch -r reporter/junit.js -c conf/remote.conf.js -e chrome,firefox,ie",
+    "jenkins": "location=remote ./node_modules/.bin/nightwatch -r reporter/junit.js -c conf/remote.conf.js",
+    "local": "location=local ./node_modules/.bin/nightwatch -r reporter/junit.js -c conf/local.conf.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gregoryduckworth/nightwatch-starter.git"
+  },
+  "dependencies": {
+    "chromedriver": "^2.40.0",
+    "dotenv": "^4.0.0",
+    "ejs": "^0.8.8",
+    "nightwatch": "^0.9.20",
+    "nightwatch-commands": "https://github.com/bbc/nightwatch-commands.git",
+    "nightwatch-vrt": "https://github.com/bbc/nightwatch-vrt.git",
+    "selenium-server-standalone-jar": "^3.12.0"
+  },
+  "license": "MIT"
+}

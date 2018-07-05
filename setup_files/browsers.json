@@ -1,0 +1,73 @@
+[
+  {
+    "name": "chrome",
+    "desiredCapabilities": {
+      "browser": "Chrome",
+      "os": "Windows",
+      "os_version": "7",
+      "resolution": "1366x768"
+    }
+  },
+  {
+    "name": "firefox",
+    "desiredCapabilities": {
+      "browser": "Firefox",
+      "os": "Windows",
+      "os_version": "7",
+      "resolution": "1366x768"
+    }
+  },
+  {
+    "name": "ie",
+    "desiredCapabilities": {
+      "browser": "IE",
+      "browser_version": "11.0",
+      "os": "Windows",
+      "os_version": "7",
+      "resolution": "1366x768",
+      "browserstack.customSendKeys": 200
+    }
+  },
+  {
+    "name": "edge",
+    "desiredCapabilities": {
+      "browser": "Edge",
+      "os": "Windows",
+      "os_version": "10",
+      "resolution": "1366x768"
+    }
+  },
+  {
+    "name": "safari",
+    "desiredCapabilities": {
+      "browser": "Safari",
+      "os": "OSX",
+      "os_version": "Sierra",
+      "resolution": "1366x768"
+    }
+  },
+  {
+    "name": "iphone",
+    "desiredCapabilities": {
+      "browser": "iPhone",
+      "platform": "MAC",
+      "device": "iPhone 6S Plus"
+    }
+  },
+  {
+    "name": "galaxyS7Edge",
+    "desiredCapabilities": {
+      "browser": "Chrome",
+      "browserName": "galaxyS7Edge",
+      "browser_version": "62.0",
+      "os": "OSX",
+      "os_version": "High Sierra",
+      "chromeOptions": {
+        "args": [
+          "hide-scrollbars"
+        ]
+      }
+    }
+  }
+]
+  

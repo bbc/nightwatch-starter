@@ -1,0 +1,33 @@
+{
+  "env": {
+    "es6": true
+  },
+  "globals": {},
+  "rules": {
+    "comma-dangle": ["error", "always-multiline"],
+    "dot-location": ["error", "property"],
+    "dot-notation": ["error", { "allowKeywords": true }],
+    "eol-last": "error",
+    "indent": ["error", 2],
+    "linebreak-style": ["error", "unix"],
+    "one-var": ["error", "never"],
+    "max-depth": ["error", 4],
+    "max-len": ["error", 160],
+    "no-irregular-whitespace": "error",
+    "no-multi-spaces": "error",
+    "no-trailing-spaces": "error",
+    "quotes": ["error", "single"],
+    "semi": ["error", "always"],
+    "keyword-spacing": ["error", {
+      "before": true,
+      "after": true
+    }],
+    "space-before-blocks": ["error", "always"],
+    "space-before-function-paren": ["error", {
+      "anonymous": "always",
+      "named": "never"
+    }],
+    "space-in-parens": ["error", "never"],
+    "valid-typeof": "error"
+  }
+}

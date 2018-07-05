@@ -1,0 +1,76 @@
+def runBrowserTests(browser) {
+  $browser: {
+    script {
+      if("${params."$browser"}" ==~ /(?i)(Y|YES|T|TRUE|ON|RUN)/ ) {
+        if("${params.tag}" == '') {
+          ansiColor('xterm') {
+            sh "npm run jenkins -- -e $browser"
+          }
+        } else {
+          ansiColor('xterm') {
+            sh "npm run jenkins -- -e $browser --tag $tag"
+          }
+        }
+      } else {
+        println "$browser tests not run"
+      }
+    }
+  }
+}
+
+pipeline {
+  agent { 
+    docker {
+      image '536795411033.dkr.ecr.eu-west-1.amazonaws.com/nightwatchjs'
+      args '-e HOME=. -v ${WORKSPACE}/pages:/home/nightwatch/pages -v ${WORKSPACE}/screenshots:/home/nightwatch/screenshots -v ${WORKSPACE}/tests:/home/nightwatch/tests'
+      reuseNode true
+    }
+  }
+
+  parameters {
+    choice(choices: 'test\nint\nlive', description: 'What environment?', name: 'environment')
+    string(name: 'tag', defaultValue: '', description: 'Run specific tag? (Optional - otherwise all tags will be run)')
+    booleanParam(defaultValue: true, description: '', name: 'chrome')
+    booleanParam(defaultValue: true, description: '', name: 'firefox')
+    booleanParam(defaultValue: true, description: '', name: 'ie')
+  }
+
+  stages {
+    stage('Install Dependencies'){
+      steps {
+        script {
+          if("${params.chrome}" ==~ /(?i)(N|NO|F|FALSE|OFF)/ &&
+            "${params.firefox}" ==~ /(?i)(N|NO|F|FALSE|OFF)/ &&
+            "${params.ie}" ==~ /(?i)(N|NO|F|FALSE|OFF)/ ) {
+            println 'Build failed as no Browsers were selected'
+            error 'Build failed' 
+          }
+          if("${params.environment}" != "live") {
+            sh "echo ENV=${params.environment}. > .env"
+          } else {
+            sh "echo ENV= > .env"
+          }
+        }
+        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: ' 89732c74-c40e-43a9-b52b-dcae19046901', usernameVariable: 'USERNAME', passwordVariable: 'ACCESS_KEY']]) {
+          sh 'echo BROWSERSTACK_USERNAME=${USERNAME} >> .env'
+          sh 'echo BROWSERSTACK_ACCESS_KEY=${ACCESS_KEY} >> .env'
+        }
+        sh 'npm install'
+      }
+    }
+    stage('Running Browser Tests'){
+      steps {
+        parallel (
+          "Chrome" : { runBrowserTests('chrome') },
+          "Firefox" : { runBrowserTests('firefox') },
+          "IE" : { runBrowserTests('ie') },
+        )
+      }
+    }
+  }
+  post {
+    always {
+      junit 'tests_output/*.xml'
+    }
+  }
+}
