@@ -18,8 +18,8 @@
     "dotenv": "^4.0.0",
     "ejs": "^0.8.8",
     "nightwatch": "^0.9.20",
-    "nightwatch-commands": "https://github.com/bbc/nightwatch-commands.git",
-    "nightwatch-vrt": "https://github.com/bbc/nightwatch-vrt.git",
+    "@bbc/nightwatch-commands": "^1.0.0",
+    "@bbc/nightwatch-vrt": "^1.0.0",
     "selenium-server-standalone-jar": "^3.12.0"
   },
   "license": "MIT"
