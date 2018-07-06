@@ -7,13 +7,13 @@ var nightwatch_config = {
   globals_path: 'global.js',
   custom_commands_path : [
     'commands',
-    'node_modules/nightwatch-commands/commands',
-    'node_modules/nightwatch-vrt/commands',
+    'node_modules/@bbc/nightwatch-commands/commands',
+    'node_modules/@bbc/nightwatch-vrt/commands',
   ],
   custom_assertions_path : [
     'assertions',
-    'node_modules/nightwatch-commands/assertions',
-    'node_modules/nightwatch-vrt/assertions',
+    'node_modules/@bbc/nightwatch-commands/assertions',
+    'node_modules/@bbc/nightwatch-vrt/assertions',
   ],
 
   selenium: {
