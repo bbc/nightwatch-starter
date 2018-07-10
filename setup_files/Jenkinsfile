@@ -22,7 +22,7 @@ pipeline {
   agent { 
     docker {
       image '536795411033.dkr.ecr.eu-west-1.amazonaws.com/nightwatchjs'
-      args '-e HOME=. -v ${WORKSPACE}/pages:/home/nightwatch/pages -v ${WORKSPACE}/screenshots:/home/nightwatch/screenshots -v ${WORKSPACE}/tests:/home/nightwatch/tests'
+      args '-v /etc/npmrc:/usr/etc/npmrc  -e HOME=. -v ${WORKSPACE}/pages:/home/nightwatch/pages -v ${WORKSPACE}/screenshots:/home/nightwatch/screenshots -v ${WORKSPACE}/tests:/home/nightwatch/tests'
       reuseNode true
     }
   }
@@ -55,7 +55,7 @@ pipeline {
           sh 'echo BROWSERSTACK_USERNAME=${USERNAME} >> .env'
           sh 'echo BROWSERSTACK_ACCESS_KEY=${ACCESS_KEY} >> .env'
         }
-        sh 'npm install'
+        sh 'npm install --registry=https://registry.npmjs.org/'
       }
     }
     stage('Running Browser Tests'){

@@ -25,8 +25,8 @@ var nightwatch_config = {
 
   common_capabilities: {
     build: process.env.BROWSERSTACK_USERNAME + '-' + process.env.ENV + '-cd-nightwatchjs-' +
-      new Date().toLocaleDateString([], {year: 'numeric', month: '2-digit', day: '2-digit'}) + ' ' +
-      new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}),
+      new Date().toLocaleDateString('en-GB', {year: 'numeric', month: '2-digit', day: '2-digit'}) + ' ' +
+      new Date().toLocaleTimeString('en-GB', {hour: '2-digit', minute:'2-digit', hour12: false}),
     project: 'CD-Nightwatch',
     'browserstack.user': process.env.BROWSERSTACK_USERNAME,
     'browserstack.key': process.env.BROWSERSTACK_ACCESS_KEY,
