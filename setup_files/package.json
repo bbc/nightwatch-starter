@@ -1,7 +1,7 @@
 {
-  "name": "cd-nightwatchjs",
+  "name": "cd-nightwatch-starter",
   "version": "1.0.0",
-  "readme": "Basic package",
+  "readme": "A starter template for Nightwatch",
   "description": "Selenium tests for Nightwatch and BrowserStack Automate",
   "scripts": {
     "proxy": "location=remote ./node_modules/.bin/nightwatch -r reporter/junit.js -c conf/proxy.conf.js -e chrome,firefox,ie",
