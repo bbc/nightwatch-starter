@@ -1,18 +1,24 @@
-def runBrowserTests(browser) {
-  $browser: {
-    script {
-      if("${params."$browser"}" ==~ /(?i)(Y|YES|T|TRUE|ON|RUN)/ ) {
-        if("${params.tag}" == '') {
-          ansiColor('xterm') {
-            sh "npm run jenkins -- -e $browser"
+def browsers = ['chrome', 'firefox', 'ie']
+
+def parallelTests = [:]
+
+browsers.each{ browser ->
+  parallelTests[browser] = {
+    $browser: {
+      script {
+        if("${params."$browser"}" ==~ /(?i)(Y|YES|T|TRUE|ON|RUN)/ ) {
+          if("${params.tag}" == '') {
+            ansiColor('xterm') {
+              sh "npm run jenkins -- -e ${browser}"
+            }
+          } else {
+            ansiColor('xterm') {
+              sh "npm run jenkins -- -e ${browser} --tag $tag"
+            }
           }
         } else {
-          ansiColor('xterm') {
-            sh "npm run jenkins -- -e $browser --tag $tag"
-          }
+          println "${browser} tests not run"
         }
-      } else {
-        println "$browser tests not run"
       }
     }
   }
@@ -22,7 +28,7 @@ pipeline {
   agent { 
     docker {
       image '536795411033.dkr.ecr.eu-west-1.amazonaws.com/nightwatchjs'
-      args '-v /etc/npmrc:/usr/etc/npmrc  -e HOME=. -v ${WORKSPACE}/pages:/home/nightwatch/pages -v ${WORKSPACE}/screenshots:/home/nightwatch/screenshots -v ${WORKSPACE}/tests:/home/nightwatch/tests'
+      args '-e HOME=. -v ${WORKSPACE}/pages:/home/nightwatch/pages -v ${WORKSPACE}/screenshots:/home/nightwatch/screenshots -v ${WORKSPACE}/tests:/home/nightwatch/tests'
       reuseNode true
     }
   }
@@ -39,12 +45,6 @@ pipeline {
     stage('Install Dependencies'){
       steps {
         script {
-          if("${params.chrome}" ==~ /(?i)(N|NO|F|FALSE|OFF)/ &&
-            "${params.firefox}" ==~ /(?i)(N|NO|F|FALSE|OFF)/ &&
-            "${params.ie}" ==~ /(?i)(N|NO|F|FALSE|OFF)/ ) {
-            println 'Build failed as no Browsers were selected'
-            error 'Build failed' 
-          }
           if("${params.environment}" != "live") {
             sh "echo ENV=${params.environment}. > .env"
           } else {
@@ -55,16 +55,14 @@ pipeline {
           sh 'echo BROWSERSTACK_USERNAME=${USERNAME} >> .env'
           sh 'echo BROWSERSTACK_ACCESS_KEY=${ACCESS_KEY} >> .env'
         }
-        sh 'npm install --registry=https://registry.npmjs.org/'
+        sh 'npm install'
       }
     }
     stage('Running Browser Tests'){
       steps {
-        parallel (
-          "Chrome" : { runBrowserTests('chrome') },
-          "Firefox" : { runBrowserTests('firefox') },
-          "IE" : { runBrowserTests('ie') },
-        )
+        script {
+          parallel parallelTests
+        }
       }
     }
   }
