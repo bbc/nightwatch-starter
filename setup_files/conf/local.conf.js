@@ -40,7 +40,7 @@ var nightwatch_config = {
         enabled: true,
         on_failure: true,
         on_error: true,
-        path: 'screenshots/failures',
+        path: 'screenshots/local/failures',
       },
       skip_testcases_on_fail: false,
       browserName: 'chrome',
