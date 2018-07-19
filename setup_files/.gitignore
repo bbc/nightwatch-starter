@@ -1,0 +1,11 @@
+tests_output
+local.log
+node_modules
+screenshots/local
+screenshots/local/failures
+screenshots/remote/diff
+screenshots/remote/failures
+screenshots/remote/latest
+npm-debug.log
+selenium-debug.log
+.env
