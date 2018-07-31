@@ -17,7 +17,7 @@
     "chromedriver": "^2.40.0",
     "dotenv": "^4.0.0",
     "ejs": "^0.8.8",
-    "nightwatch": "^0.9.20",
+    "nightwatch": "^1.0.0",
     "@bbc/nightwatch-commands": "^1.0.0",
     "@bbc/nightwatch-vrt": "^1.0.0",
     "selenium-server-standalone-jar": "^3.12.0"
