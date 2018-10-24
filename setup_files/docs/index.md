@@ -5,6 +5,7 @@
   2. [Windows](installation.md#windows)
   3. [Docker](installation.md#docker)
 * [How to run](howToRun.md)
+* [Other Packages](otherPackages.md)
 * [Third Party Programs](thirdParty.md)
 * [Limitations](limitations.md)
 * [Troubleshooting](troubleshooting.md)

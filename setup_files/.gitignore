@@ -1,0 +1,12 @@
+.env
+browserstack.err
+local.log
+node_modules
+npm-debug.log
+screenshots/local
+screenshots/local/failures
+screenshots/remote/diff
+screenshots/remote/failures
+screenshots/remote/latest
+selenium-debug.log
+tests_output

@@ -2,6 +2,15 @@
 
 # How To Run
 
+## Environment Variables
+
+The following are the various environment variables that can be set
+
+* `BROWSERSTACK_USERNAME` and `BROWSERSTACK_ACCESS_KEY` are your Browserstack credentials
+* `CHROME_HEADLESS` can be set to any value to be 'headless'
+* `ENV` is the environment we want to test against, usually `int.`, `test.` and blank for live
+* `LOCAL` is the url when we want to run against a build that is local to the machine
+
 ## Run all Tests
 
 To run the tests you can use any of the following:
@@ -9,6 +18,8 @@ To run the tests you can use any of the following:
 * ```npm run local``` - runs all the tests locally through Chrome
 * ```npm run remote``` - runs all the tests on BrowserStack
 * ```npm run proxy``` - runs all the tests on BrowserStack whilst on Reith
+* ```npm run dev``` - runs all the tests locally through Chrome against a developer build
+* ```npm run dev-remote``` - runs all the tests on BrowserStack against a developer build
 
 ## Run Specific Tests
 

@@ -1,26 +1,29 @@
 {
-  "name": "cd-nightwatchjs",
+  "name": "cd-nightwatch-starter",
   "version": "1.0.0",
-  "readme": "Basic package",
+  "readme": "A starter template for Nightwatch",
   "description": "Selenium tests for Nightwatch and BrowserStack Automate",
   "scripts": {
-    "proxy": "location=remote ./node_modules/.bin/nightwatch -r reporter/junit.js -c conf/proxy.conf.js -e chrome,firefox,ie",
-    "remote": "location=remote ./node_modules/.bin/nightwatch -r reporter/junit.js -c conf/remote.conf.js -e chrome,firefox,ie",
-    "jenkins": "location=remote ./node_modules/.bin/nightwatch -r reporter/junit.js -c conf/remote.conf.js",
-    "local": "location=local ./node_modules/.bin/nightwatch -r reporter/junit.js -c conf/local.conf.js"
+    "proxy": "LOCATION=remote ./node_modules/.bin/nightwatch -r reporter/junit.js -c conf/proxy.conf.js -e chrome,ie",
+    "remote": "LOCATION=remote ./node_modules/.bin/nightwatch -r reporter/junit.js -c conf/remote.conf.js -e chrome,ie",
+    "jenkins": "LOCATION=remote ./node_modules/.bin/nightwatch -r reporter/junit.js -c conf/remote.conf.js",
+    "local": "LOCATION=local ./node_modules/.bin/nightwatch -r reporter/junit.js -c conf/local.conf.js",
+    "dev-remote": "LOCATION=remote node ./scripts/remote.runner.js -r reporter/junit.js -c conf/dev-remote.conf.js -e chrome,ie",
+    "dev": "rm -rf screenshots/local && LOCATION=local ./node_modules/.bin/nightwatch -r reporter/junit.js -c conf/local.conf.js"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/gregoryduckworth/nightwatch-starter.git"
+    "url": "https://github.com/bbc/cd-nightwatch-starter.git"
   },
   "dependencies": {
-    "chromedriver": "^2.40.0",
+    "@bbc/nightwatch-commands": "^1.0.9",
+    "@bbc/nightwatch-vrt": "^1.0.2",
+    "browserstack-local": "^1.3.4",
+    "chromedriver": "^2.42.0",
     "dotenv": "^4.0.0",
     "ejs": "^0.8.8",
     "nightwatch": "^0.9.20",
-    "nightwatch-commands": "https://github.com/bbc/nightwatch-commands.git",
-    "nightwatch-vrt": "https://github.com/bbc/nightwatch-vrt.git",
-    "selenium-server-standalone-jar": "^3.12.0"
+    "selenium-server-standalone-jar": "^3.14.0"
   },
   "license": "MIT"
 }

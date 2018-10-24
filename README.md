@@ -4,14 +4,17 @@ A simple starter kit for Nightwatch.js.
 ## Requirements
 
   * Node.js
+  * NPM
+  * Browserstack credentials (optional)
 
 ## Installation
 
-Download the install.sh file into your project root, and execute it. You'll want
-to execute this **outside** of any development containers you have, to have access
-to your web browsers. 
+Ensure that you are in an empty directory where you wish to install nightwatch to, before using the following command in your terminal:
 
-You can run the installer by copying and pasting this command in your terminal:
-
-    curl -O https://raw.githubusercontent.com/bbc/cd-nightwatch-starter/master/install.sh ; sudo chmod +x install.sh ; ./install.sh
+    curl -O https://raw.githubusercontent.com/bbc/nightwatch-starter/master/install.sh ; sudo chmod +x install.sh ; ./install.sh
     
+## To write tests
+
+At present there is an example test file [here](setup_files/tests/DemoTest.js)
+
+For information on the keywords and using page objects you can find the documentation on the [Nightwatch Website](http://www.nightwatchjs.org)

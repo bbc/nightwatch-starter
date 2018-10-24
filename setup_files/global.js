@@ -7,11 +7,11 @@ module.exports = {
 
   // screenshot visual regression options
   visual_regression_settings: {
-    latest_screenshots_path: 'screenshots/' + process.env.location + '/latest',
+    latest_screenshots_path: 'screenshots/' + process.env.LOCATION + '/latest',
     latest_suffix: '',
-    baseline_screenshots_path: 'screenshots/' + process.env.location + '/baseline',
+    baseline_screenshots_path: 'screenshots/' + process.env.LOCATION + '/baseline',
     baseline_suffix: '',
-    diff_screenshots_path: 'screenshots/' + process.env.location + '/diff',
+    diff_screenshots_path: 'screenshots/' + process.env.LOCATION + '/diff',
     diff_suffix: '',
     threshold: 0,
     prompt: false,
@@ -20,7 +20,7 @@ module.exports = {
 
   // If running locally start the chromedriver
   before: function (done) {
-    if (process.env.location === 'local') {
+    if (process.env.LOCATION === 'local') {
       chromedriver.start();
     }
 
@@ -34,7 +34,7 @@ module.exports = {
 
   // If running locally stop the chromedriver
   after: function (done) {
-    if (process.env.location === 'local') {
+    if (process.env.LOCATION === 'local') {
       chromedriver.stop();
     }
 

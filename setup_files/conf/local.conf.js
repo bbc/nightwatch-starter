@@ -1,60 +1,38 @@
+require('dotenv').config();
 var selenium = require('selenium-server-standalone-jar');
 var chromedriver = require('chromedriver');
 
-var nightwatch_config = {
-  src_folders: ['tests'],
-  page_objects_path: ['pages'],
-  globals_path: 'global.js',
-  custom_commands_path : [
-    'commands',
-    'node_modules/nightwatch-commands/commands',
-    'node_modules/nightwatch-vrt/commands',
-  ],
-  custom_assertions_path : [
-    'assertions',
-    'node_modules/nightwatch-commands/assertions',
-    'node_modules/nightwatch-vrt/assertions',
-  ],
+// Read in the common nightwatch configuration
+var nightwatch_config = require('./common-config');
 
-  selenium: {
-    start_process : true,
-    server_path : selenium.path,
-    host: '127.0.0.1',
-    port : 9515,
-    cli_args: {
-      'webdriver.chrome.driver': chromedriver.path,
-    },
+Object.assign(nightwatch_config.selenium, {
+  start_process: true,
+  server_path: selenium.path,
+  host: '127.0.0.1',
+  port: 9515,
+  cli_args: {
+    'webdriver.chrome.driver': chromedriver.path,
   },
+});
 
-  common_capabilities: {
-    build: 'cd-nightwatchjs',
-    project: 'CD-Nightwatch',
-  },
+nightwatch_config.test_workers = false;
 
-  test_workers: false,
-
-  test_settings: {
-    default: {
-      default_path_prefix: '',
-      screenshots: {
-        enabled: true,
-        on_failure: true,
-        on_error: true,
-        path: 'screenshots/failures',
-      },
-      skip_testcases_on_fail: false,
-      browserName: 'chrome',
-      desiredCapabilities: {
-        chromeOptions: {
-          args: [
-            'incognito',
-            'window-size=1366,768',
-          ],
-        },
+Object.assign(nightwatch_config.test_settings, {
+  default: {
+    default_path_prefix: '',
+    browserName: 'chrome',
+    desiredCapabilities: {
+      acceptSslCerts: true,
+      acceptInsecureCerts: true,
+      chromeOptions: {
+        args: [
+          'incognito',
+          'window-size=1366,768',
+        ],
       },
     },
   },
-};
+});
 
 // Code to support common capabilites
 for (var i in nightwatch_config.test_settings) {
@@ -64,6 +42,10 @@ for (var i in nightwatch_config.test_settings) {
   config.desiredCapabilities = config.desiredCapabilities || {};
   for (var j in nightwatch_config.common_capabilities) {
     config.desiredCapabilities[j] = config.desiredCapabilities[j] || nightwatch_config.common_capabilities[j];
+  }
+  if (process.env.CHROME_HEADLESS) {
+    config.desiredCapabilities.chromeOptions.args.push('headless', 'disable-gpu');
+    console.log('\033[0m\033[1;33mRunning Chrome in headless mode');
   }
 }
 

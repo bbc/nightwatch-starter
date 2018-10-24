@@ -1,4 +1,5 @@
 require('dotenv').config();
+var browserstack = require('browserstack-local');
 var fs = require('fs');
 
 // Read in the browser configs
@@ -7,12 +8,8 @@ var browsers = JSON.parse(fs.readFileSync('./browsers.json', 'utf8'));
 // Read in the common nightwatch configuration
 var nightwatch_config = require('./common-config');
 
-Object.assign(nightwatch_config.test_settings.default, {
-  proxy: {
-    protocol: 'http',
-    host: 'www-cache.reith.bbc.co.uk',
-    port: '80',
-  },
+Object.assign(nightwatch_config.common_capabilities, {
+  'browserstack.local': true,
 });
 
 var config = nightwatch_config.test_settings || {};
