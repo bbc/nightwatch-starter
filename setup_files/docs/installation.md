@@ -19,7 +19,6 @@
   export BROWSERSTACK_ACCESS_KEY=<browserstack-access-key>
   ```
 * Install [GraphicsMagick](http://www.graphicsmagick.org/README.html#installation) via [this homebrew formula](http://brewformulas.org/Graphicsmagick)
-* (Optional) Run the chrome-auto.mobileconfig on your machine, this is to allow Chrome to run locally without prompting for your certificate  * (Optional) Run the [chrome-auto.mobileconfig](../chrome-auto.mobileconfig) on your machine, (download raw file and double-click to open), this is to allow Chrome to run locally without prompting for your certificate
 
 ## Windows
 
@@ -34,7 +33,6 @@
   setx BROWSERSTACK_ACCESS_KEY <browserstack-access-key>
   ```
 * Install [GraphicsMagick](http://www.graphicsmagick.org/README.html#installation)
-* (Optional) Run the [chrome-regedit.reg](../chrome-regedit.reg) on your machine, (download raw file and double-click to open), this is to allow Chrome to run locally without prompting for your certificate
 
 ## Docker
 
