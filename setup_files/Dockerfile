@@ -2,7 +2,7 @@
 # Nightwatch.js Dockerfile
 #
 
-FROM node:8.11.4-alpine
+FROM node:10.12.0-alpine
 
 ENV APP_DIR /nightwatch
 
@@ -21,6 +21,9 @@ RUN mkdir -p $APP_DIR && cp -a /tmp/node_modules $APP_DIR
 # Change working directory
 WORKDIR $APP_DIR
 COPY . $APP_DIR
+
+# Nightwatch  
+RUN npm ci
 
 # Run Tests
 CMD npm run remote
