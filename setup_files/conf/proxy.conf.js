@@ -1,30 +1,15 @@
-require('dotenv').config();
-var fs = require('fs');
-
-// Read in the browser configs
-var browsers = JSON.parse(fs.readFileSync('./browsers.json', 'utf8'));
-
 // Read in the common nightwatch configuration
-var nightwatch_config = require('./common-config');
+var nightwatch_config = require('./common.conf');
 
-Object.assign(nightwatch_config.test_settings.default, {
-  proxy: {
-    protocol: 'http',
-    host: 'www-cache.reith.bbc.co.uk',
-    port: '80',
-  },
-});
+var proxy = {
+  protocol: process.env.PROXY_PROTOCOL,
+  host: process.env.PROXY_HOST,
+  port: process.env.PROXY_PORT,
+};
 
-var config = nightwatch_config.test_settings || {};
-
-browsers.forEach(function (browser) {
-  config[browser.name] = {};
-  config[browser.name].selenium_host = nightwatch_config.selenium.host;
-  config[browser.name].selenium_port = nightwatch_config.selenium.port;
-  config[browser.name].desiredCapabilities = browser.desiredCapabilities || {};
-  for (var i in nightwatch_config.common_capabilities) {
-    config[browser.name].desiredCapabilities[i] = nightwatch_config.common_capabilities[i];
-  }
-});
+for(i in nightwatch_config.test_settings) {
+  nightwatch_config.test_settings[i].proxy = {};
+  Object.assign(nightwatch_config.test_settings[i].proxy, proxy);
+}
 
 module.exports = nightwatch_config;
