@@ -5,12 +5,12 @@ Object.assign(nightwatch_config.webdriver, {
   start_process: false,
   host: '127.0.0.1',
   port: 9515,
+  default_path_prefix: '',
 });
 
 nightwatch_config.test_workers = false;
 
 Object.assign(nightwatch_config.test_settings.default, {
-  default_path_prefix: '',
   browserName: 'chrome',
   desiredCapabilities: {
     acceptSslCerts: true,
