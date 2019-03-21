@@ -2,7 +2,8 @@
 var nightwatch_config = require('./common.conf');
 
 Object.assign(nightwatch_config.webdriver, {
-  start_process: false,
+  start_process: true,
+  server_path: 'node_modules/.bin/chromedriver',
   host: '127.0.0.1',
   port: 9515,
   default_path_prefix: '',

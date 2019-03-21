@@ -1,5 +1,3 @@
-var chromedriver = require('chromedriver');
-
 module.exports = {
 
   // Global settings
@@ -20,10 +18,6 @@ module.exports = {
 
   // If running locally start the chromedriver
   before: function (done) {
-    if (process.env.LOCATION === 'local') {
-      chromedriver.start();
-    }
-
     done();
   },
 
@@ -34,10 +28,6 @@ module.exports = {
 
   // If running locally stop the chromedriver
   after: function (done) {
-    if (process.env.LOCATION === 'local') {
-      chromedriver.stop();
-    }
-
     done();
   },
 
