@@ -8,7 +8,6 @@ ENV APP_DIR /nightwatch
 
 # Node.js setup
 RUN apk --no-cache add \
-  graphicsmagick \
   git
 
 # Copy package.json and install dependencies

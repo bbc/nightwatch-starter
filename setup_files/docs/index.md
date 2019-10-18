@@ -6,6 +6,6 @@
   3. [Docker](installation.md#docker)
 * [How to run](howToRun.md)
 * [Other Packages](otherPackages.md)
-* [Third Party Programs](thirdParty.md)
+* [Dependencies](dependencies.md)
 * [Limitations](limitations.md)
 * [Troubleshooting](troubleshooting.md)
